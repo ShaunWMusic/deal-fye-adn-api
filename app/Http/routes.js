@@ -17,6 +17,7 @@
 
 const Route = use('Route');
 
+Route.on('/').render('welcome')
 Route.post('/api/users', 'UserController.store');
 
 Route.resource('/api/users', 'UserController')

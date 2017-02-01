@@ -1,7 +1,7 @@
 {
-  "name": "Starter Api",
+  "name": "Deal Fye Adnonis Api",
   "description": "A simple app for working with node APIs and Servers.",
-  "repository": "https://github.com/rtablada/starter-api",
+  "repository": "https://github.com/ShaunWMusic/deal-fye-adn-api",
   "addons": ["heroku-postgresql"],
   "scripts": {
     "postdeploy": "npm run migration && npm run seed"
