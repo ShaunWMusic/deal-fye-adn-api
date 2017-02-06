@@ -17,11 +17,23 @@
 
 const Route = use('Route');
 
-Route.on('/').render('welcome')
 Route.post('/api/users', 'UserController.store');
 
 Route.resource('/api/users', 'UserController')
   .only(['index', 'show', 'update', 'destroy'])
   .middleware('auth');
+
+// Route.resource('/api/pledges', 'PledgeController')
+  // .only(['index', 'show']);
+
+// Route.resource('/api/organizations', 'OrganizationController')
+  // .except(['create', 'edit']);
+
+// Route.resource('/api/categories', 'CategoryController')
+  // .except(['create', 'edit']);
+
+// Route.resource('/api/pledges', 'PledgeController')
+  // .only(['store', 'update', 'destroy'])
+  // .middleware('auth');
 
 Route.post('/api/token-auth', 'SessionController.store');

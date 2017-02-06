@@ -6,11 +6,10 @@ class UsersTableSchema extends Schema {
 
   up() {
     this.create('users', (table) => {
-      table.increments();
-      // table.string('username', 80).notNullable().unique()
-      table.string('email', 254).notNullable().unique();
+      table.increments('id');
+      table.string('username', 80).notNullable().unique();
       table.string('password', 60).notNullable();
-      // table.boolean('is_admin').default(false);
+      table.string('email', 254).notNullable().unique();
       table.timestamps();
     });
   }

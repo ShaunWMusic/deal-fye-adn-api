@@ -3,12 +3,13 @@
 const User = use('App/Model/User');
 
 const Hash = use('Hash');
-const attributes = ['email', 'password', 'password-confirmation'];
+const attributes = ['username', 'email', 'password', 'password-confirmation'];
 
 class UserController {
 
   get createRules() {
     return {
+      username: 'required|username|unique:users',
       email: 'required|email|unique:users',
       password: 'required|confirmed',
     };
@@ -16,12 +17,16 @@ class UserController {
 
   get createMessages() {
     return {
+      'username.unique': 'That username has already been used by another account',
       'email.unique': 'That email has already been used by another account',
     };
   }
 
   * index(request, response) {
-    const users = yield User.with().fetch();
+    if (request.input('current')) {
+    return response.jsonApi('User', request.authUser);
+    }
+    const users = yield User.fetch();
 
     response.jsonApi('User', users);
   }
@@ -41,7 +46,7 @@ class UserController {
 
   * show(request, response) {
     const id = request.param('id');
-    const user = yield User.with().where({ id }).firstOrFail();
+    const user = yield User.where({ id }).firstOrFail();
 
     response.jsonApi('User', user);
   }
@@ -54,7 +59,7 @@ class UserController {
     const foreignKeys = {
     };
 
-    const user = yield User.with().where({ id }).firstOrFail();
+    const user = yield User.where({ id }).firstOrFail();
     user.fill(Object.assign({}, input, foreignKeys));
     yield user.save();
 

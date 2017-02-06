@@ -9,6 +9,10 @@ class User extends Lucid {
     return this.hasMany('App/Model/Token');
   }
 
+  deal() {
+    return this.hasOne('App/Model/deal');
+  }
+
   static get unguarded() {
     return false;
   }
@@ -17,6 +21,7 @@ class User extends Lucid {
     return [
       'email',
       'password',
+      'username',
     ];
   }
 
