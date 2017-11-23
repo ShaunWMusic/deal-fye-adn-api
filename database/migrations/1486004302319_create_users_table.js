@@ -6,10 +6,10 @@ class UsersTableSchema extends Schema {
 
   up() {
     this.create('users', (table) => {
-      table.increments('id');
+      table.increments();
       table.string('username', 80).notNullable().unique();
+      table.string('email', 200).notNullable().unique();
       table.string('password', 60).notNullable();
-      table.string('email', 254).notNullable().unique();
       table.timestamps();
     });
   }

@@ -32,7 +32,7 @@ module.exports = {
     serializer: 'Lucid',
     model: 'App/Model/User',
     scheme: 'session',
-    uid: 'email',
+    uid: 'username',
     password: 'password',
   },
 
@@ -48,7 +48,7 @@ module.exports = {
     serializer: 'Lucid',
     model: 'App/Model/User',
     scheme: 'basic',
-    uid: 'email',
+    uid: 'username',
     password: 'password',
   },
 
@@ -63,11 +63,14 @@ module.exports = {
   */
   jwt: {
     serializer: 'Lucid',
-    model: 'App/Model/User',
     scheme: 'jwt',
-    uid: 'email',
-    password: 'password',
+    model: 'App/Model/User',
     secret: Config.get('app.appKey'),
+    uid: 'username',
+    password: 'password',
+    options: {
+      // Options to be used while generating token
+    },
   },
 
   /*

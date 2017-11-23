@@ -4,13 +4,16 @@ const Lucid = use('Lucid');
 const _ = require('underscore');
 
 class User extends Lucid {
-
+  static boot() {
+    super.boot();
+    this.addHook('beforeCreate', 'User.encryptPassword');
+  }
   apiTokens() {
     return this.hasMany('App/Model/Token');
   }
 
   deal() {
-    return this.hasOne('App/Model/deal');
+    return this.hasMany('App/Model/deal');
   }
 
   static get unguarded() {
@@ -19,9 +22,9 @@ class User extends Lucid {
 
   static get fillable() {
     return [
+      'username',
       'email',
       'password',
-      'username',
     ];
   }
 

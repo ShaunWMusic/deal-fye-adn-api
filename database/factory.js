@@ -26,3 +26,9 @@ Factory.blueprint('App/Model/User', fake => ({
   email: fake.email(),
   password: fake.password(),
 }));
+
+Factory.blueprint('App/Model/Deal', fake => ({
+  title: fake.name(),
+  keyword: fake.sentence(),
+  maxprice: fake.name(),
+}));

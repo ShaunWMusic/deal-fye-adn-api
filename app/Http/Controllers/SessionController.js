@@ -2,24 +2,19 @@
 
 const User = use('App/Model/User');
 const E = require('node-exceptions');
-const Hash = use('Hash');
 
 class SessionController {
 
   * store(request, response) {
-    const { username: email, password } = request.all();
+    const { username, password } = request.all();
 
     try {
-      const user = yield User.findBy('email', email);
-      const passwordValid = yield Hash.verify(password, user.password);
+      const token = yield request.auth.attempt(username, password);
 
-      if (!passwordValid) {
-        throw new E();
-      }
-
-      const token = yield request.auth.generate(user);
       response.json({ token });
     } catch (e) {
+      // response.unauthorized({ error: e.message });
+
       response.status(401).json({
         errors: [
           {
